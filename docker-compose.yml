@@ -1,0 +1,27 @@
+services:
+  my-api:                      # my work: app.py
+    build: .
+    command: python app.py
+    ports:
+      - "${MY_API_PORT}:5000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      ACCESS_MINUTES: ${ACCESS_MINUTES}
+      REFRESH_MINUTES: ${REFRESH_MINUTES}
+      API_USER: ${API_USER}
+      API_PASSWORD: ${API_PASSWORD}
+      PORT: 5000
+      LOG_FILE: /app/logs/app.log
+    volumes:
+      - ./logs:/app/logs
+
+  class-api:                   # classwork: app2.py
+    build: .
+    command: python app2.py
+    ports:
+      - "${CLASS_API_PORT}:5000"
+    environment:
+      PORT: 5000
+      LOG_FILE: /app/logs/app2.log
+    volumes:
+      - ./logs:/app/logs
